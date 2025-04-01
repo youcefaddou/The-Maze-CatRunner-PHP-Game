@@ -1,0 +1,161 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    min-height: 80vh;
+}
+
+h1 {
+    color: #4a2d2d;
+    margin: 0 0 30px 0;
+    font-size: 2.5rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+}
+
+#mazeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    gap: 20px;
+}
+
+.win-message {
+    text-align: center;
+    padding: 20px;
+    background-color: #dff0d8;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.win-message p {
+    color: #3c763d;
+    font-size: 1.5em;
+    margin: 0 0 15px 0;
+}
+
+.error-message {
+    color: #a94442;
+    background-color: #f2dede;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 0 0 15px 0;
+    text-align: center;
+    width: 100%;
+}
+
+button {
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.win-message button {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.replay button {
+    background-color: #4a2d2d;
+    color: white;
+    border-radius: 12px;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 10px;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.maze {
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.maze td {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    position: relative;
+    border: 1px solid #eee;
+}
+
+.maze img {
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+}
+
+.cat-container {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+.cat-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.hammer-equipped {
+    position: absolute;
+    width: 10px;       
+    height: 10px;      
+    bottom: 0;         
+    right: 0;          
+    z-index: 2;
+    transform: translate(25%, 25%);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.controls form {
+    display: grid;
+    grid-template-areas:
+        ". up ."
+        "left . right"
+        ". down .";
+    gap: 5px;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.controls button:hover {
+    transform: scale(1.1);
+}
+
+.controls button:nth-child(1) { grid-area: up; }
+.controls button:nth-child(2) { grid-area: left; }
+.controls button:nth-child(3) { grid-area: right; }
+.controls button:nth-child(4) { grid-area: down; }
+
+.controls img {
+    width: 50px;
+    height: 50px;
+}
