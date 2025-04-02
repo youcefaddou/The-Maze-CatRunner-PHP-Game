@@ -13,6 +13,6 @@ aléatoirement à chaque fois que vous recommencez
 labyrinthes, plus besoin de les écrire à la main ! A chaque nouvelle partie, un
 labyrinthe sera choisi aléatoirement entre les labyrinthes pré faits que vous
 avez réalisés précédemment et une dizaine de labyrinthes automatisés.
-- A chaque déplacement du chat, la souris doit se déplacer dans la case la plus lointaine du chat à sa disposition
-- Ajout de cases "item", avec comme 1er item un marteau posé aléatoirement dans la grille. Lorsque le chat arrive sur la case marteau, il s'en saisit et peut briser le prochain mur qu'il rencontre
+➢ A chaque déplacement du chat, la souris doit se déplacer dans la case la plus lointaine du chat à sa disposition
+➢ Ajout de cases "item", avec comme 1er item un marteau posé aléatoirement dans la grille. Lorsque le chat arrive sur la case marteau, il s'en saisit et peut briser le prochain mur qu'il rencontre
 
