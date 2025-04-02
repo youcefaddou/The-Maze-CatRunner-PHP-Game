@@ -10,8 +10,13 @@
 </head>
 
 <body>
+    <header class="headerContainer">
+    <img src="./images/brouillard.png" alt="Brouillard">
+    <img src="./images/brouillard.png" alt="Brouillard">
     <h1>The Maze Cat Runner</h1>
-
+    <img src="./images/brouillard.png" alt="Brouillard">
+    <img src="./images/brouillard.png" alt="Brouillard">
+    </header>
     <div id="mazeContainer">
         <?php if (isset($_SESSION['win']) && $_SESSION['win']) : ?>
             <div class="win-message">

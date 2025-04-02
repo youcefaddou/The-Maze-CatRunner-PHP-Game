@@ -44,7 +44,7 @@ $labyrinthes = [
 //initialisat° du labyrinthe
 if (!isset($_SESSION['lab']) || isset($_POST['reset'])) {
     $_SESSION['message'] = '';
-    $_SESSION['lab'] = $labyrinthes[array_rand($labyrinthes)];
+    $_SESSION['lab'] = $labyrinthes[array_rand($labyrinthes)];  //choix d'un lab random
     $_SESSION['win'] = false;
     $_SESSION['hammer'] = false;
     
@@ -112,7 +112,7 @@ if (isset($_POST['direction'])) {
     }
     $_SESSION['message'] = $messageForThisTurn; //msg temporaire pour un tour
 
-    // Déplacement souris
+    //deplacement souris
     if ($catMoved && !$_SESSION['win']) {
         $_SESSION['pos']['x'] = $new_cat_x;
         $_SESSION['pos']['y'] = $new_cat_y;

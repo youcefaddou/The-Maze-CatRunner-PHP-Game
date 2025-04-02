@@ -3,20 +3,87 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #c0e8e1;
+    background-color: #d4f3ed;
     margin: 0;
-    padding: 20px;
     min-height: 80vh;
 }
-
-h1 {
-    color: #4a2d2d;
-    margin: 0 0 30px 0;
-    font-size: 2.5rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    text-align: center;
+@keyframes pixelBounceLeft {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-15px) scale(1.1);
+    }
+}
+@keyframes pixelBounceRight {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(15px) scale(1.1);
+    }
 }
 
+.headerContainer {
+    background-color: rgb(244, 230, 208);
+    padding: 15px;
+    width: 98%;
+    margin-bottom: 5vh;
+    margin-top: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.headerContainer h1 {
+    font-size: 2.5rem;
+    margin: 0 20px;
+    z-index: 2;
+    background-color: #d4f3ed;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.headerContainer img {
+    position: relative;
+    border-radius: 10px;
+    top: 5px;
+    left: -8px;
+    opacity: 0.9;
+    image-rendering: pixelated;
+    filter: 
+        drop-shadow(2px 2px 0px rgba(0,0,0,0.3))
+        drop-shadow(-2px -2px 0px rgba(255,255,255,0.3));
+}
+.headerContainer img:nth-child(1) {
+    animation: pixelBounceLeft 2s ease-in-out infinite;
+    margin-right: -10px;
+    left: -20px;
+}
+
+.headerContainer img:nth-child(2) {
+    animation: pixelBounceLeft 2s ease-in-out infinite reverse;
+    margin-right: -20px;
+}
+
+.headerContainer img:nth-child(4) {
+    animation: pixelBounceRight 2s ease-in-out infinite;
+    margin-left: -20px;
+    left: 10px;
+}
+
+.headerContainer img:last-child {
+    animation: pixelBounceRight 2s ease-in-out infinite reverse;
+    margin-left: -10px;
+    left: 20px;
+
+}
 #mazeContainer {
     display: flex;
     flex-direction: column;
@@ -110,17 +177,19 @@ button {
     width: 40px;
     height: 40px;
 }
+
 .cat-img {
     width: 100%;
     height: 100%;
     display: block;
 }
+
 .hammer-equipped {
     position: absolute;
-    width: 10px;       
-    height: 10px;      
-    bottom: 0;         
-    right: 0;          
+    width: 10px;
+    height: 10px;
+    bottom: 0;
+    right: 0;
     z-index: 2;
     transform: translate(25%, 25%);
 }
@@ -151,10 +220,21 @@ button {
     transform: scale(1.1);
 }
 
-.controls button:nth-child(1) { grid-area: up; }
-.controls button:nth-child(2) { grid-area: left; }
-.controls button:nth-child(3) { grid-area: right; }
-.controls button:nth-child(4) { grid-area: down; }
+.controls button:nth-child(1) {
+    grid-area: up;
+}
+
+.controls button:nth-child(2) {
+    grid-area: left;
+}
+
+.controls button:nth-child(3) {
+    grid-area: right;
+}
+
+.controls button:nth-child(4) {
+    grid-area: down;
+}
 
 .controls img {
     width: 50px;
