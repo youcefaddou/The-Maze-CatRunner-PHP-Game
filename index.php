@@ -30,7 +30,7 @@
                             for ($x = 0; $x < strlen($ligne); $x++) {
                                 $diffY = $y - $_SESSION['pos']['y'];
                                 $diffX = $x - $_SESSION['pos']['x'];
-                                $visible = ($diffY >= -2 && $diffY <= 2) && ($diffX >= -2 && $diffX <= 2);
+                                $visible = ($diffY >= -1 && $diffY <= 1) && ($diffX >= -1 && $diffX <= 1);
 
                                 echo '<td>';
                                 if ($visible) {
@@ -38,20 +38,18 @@
                                         echo '<div class="cat-container">';
                                         echo '<img src="./images/chat.png" alt="chat" class="cat-img">';
                                         if (isset($_SESSION['hammer']) && $_SESSION['hammer']) {
-                                            echo '<img src="./images/marteau.png" alt="marteau" height="36px" width="36px" class="hammer-equipped">';
+                                            echo '<img src="./images/marteau.png" alt="marteau" class="hammer-equipped">';
                                         }
                                         echo '</div>';
                                     } else {
-                                        $case = $_SESSION['lab'][$y][$x]; // Utilise le labyrinthe modifiable
+                                        $case = $_SESSION['lab'][$y][$x]; //utilise le labyrinthe modifiable
                                         if ($case == '#') {
                                             echo '<img src="./images/mur.png" alt="mur">';
                                         } elseif ($case == 'H') {
                                             echo '<img src="./images/marteau.png" alt="marteau">';
                                         } elseif ($case == 'S') {
                                             echo '<img src="./images/souris.png" alt="souris">';
-                                        } elseif ($case == 'G') {
-                                            echo '<img src="./images/herbe.png" alt="herbe">';
-                                        } else {
+                                        }  else {
                                             echo '&nbsp;';
                                         }
                                     }
@@ -80,7 +78,6 @@
             <?php if (!empty($_SESSION['message'])): ?>
                 <p class="error-message"><?php echo $_SESSION['message']; ?></p>
             <?php endif; ?>
-
         <?php endif; ?>
     </div>
 </body>

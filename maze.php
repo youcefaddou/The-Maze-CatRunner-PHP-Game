@@ -3,7 +3,6 @@ session_start();
 if (isset($_POST['direction']) || isset($_POST['reset'])) {
     $_SESSION['message'] = '';
 }
-
 $labyrinthes = [
     [
         "################",
@@ -13,7 +12,7 @@ $labyrinthes = [
         "#.#.###.###.#.##",
         "#.#H........#.##",
         "#.###.#####.#.##",
-        "#.....#...G.#.##",
+        "#.....#.....#.##",
         "#####.#.#####.##",
         "#.....#......C##",
         "################"
@@ -23,7 +22,7 @@ $labyrinthes = [
         "#S#...#...#.#C#",
         "#.#.#.#.#.#...#",
         "#.#.#.#.#.#.#.#",
-        "#...#...#G#.#.#",
+        "#...#...#.#.#.#",
         "#.#.#.#H#...#.#",
         "###############"
     ],
@@ -32,7 +31,7 @@ $labyrinthes = [
         "#C............H#",
         "#.#####.#####.##",
         "#.#...#.#...#.##",
-        "#G#.###.###.#.##",
+        "#.#.###.###.#.##",
         "#.#.....#.....##",
         "#.###.#.#####.##",
         "#.....#.....#S##",
@@ -41,13 +40,14 @@ $labyrinthes = [
         "################"
     ]
 ];
+
 //initialisat° du labyrinthe
 if (!isset($_SESSION['lab']) || isset($_POST['reset'])) {
     $_SESSION['message'] = '';
-    $_SESSION['lab'] = $labyrinthes[array_rand($labyrinthes)];  //choix d'un labyrinthe aléatoire
+    $_SESSION['lab'] = $labyrinthes[array_rand($labyrinthes)];
     $_SESSION['win'] = false;
     $_SESSION['hammer'] = false;
-    $_SESSION['grass'] = false;
+    
     //trouver la position du chat
     foreach ($_SESSION['lab'] as $y => $ligne) {
         $x = strpos($ligne, 'C');
@@ -58,8 +58,7 @@ if (!isset($_SESSION['lab']) || isset($_POST['reset'])) {
     }
 }
 //trouver la souris
-function findMouse($lab)
-{
+function findMouse($lab) {
     foreach ($lab as $y => $ligne) {
         $x = strpos($ligne, 'S');
         if ($x !== false) {
@@ -68,32 +67,28 @@ function findMouse($lab)
     }
     return null;
 }
+
 if (isset($_POST['direction'])) {
     $_SESSION['message'] = '';
-    //déplacer le chat en 1er
+    
+    //deplacement du chat
     $new_cat_x = $_SESSION['pos']['x'];
     $new_cat_y = $_SESSION['pos']['y'];
 
     switch ($_POST['direction']) {
-        case 'up':
-            $new_cat_y--;
-            break;
-        case 'down':
-            $new_cat_y++;
-            break;
-        case 'left':
-            $new_cat_x--;
-            break;
-        case 'right':
-            $new_cat_x++;
-            break;
+        case 'up': $new_cat_y--; break;
+        case 'down': $new_cat_y++; break;
+        case 'left': $new_cat_x--; break;
+        case 'right': $new_cat_x++; break;
     }
+
     //verification déplacement chat
     $catMoved = false;
-    $messageForThisTurn = ''; //variable temporaire pr le message
+    $messageForThisTurn = '';
     
     if (isset($_SESSION['lab'][$new_cat_y][$new_cat_x])) {
         $case = $_SESSION['lab'][$new_cat_y][$new_cat_x];
+        
         if ($case == 'S') {
             $_SESSION['win'] = true;
             $catMoved = true;
@@ -102,11 +97,7 @@ if (isset($_POST['direction'])) {
             $messageForThisTurn = "Vous avez trouvé un marteau, vous pouvez casser un mur.";
             $_SESSION['lab'][$new_cat_y][$new_cat_x] = '.';
             $catMoved = true;
-        } elseif ($case === 'G') {
-            $_SESSION['grass'] = true;
-            
-        }
-         elseif ($case == '#') {
+        } elseif ($case == '#') {
             if (isset($_SESSION['hammer']) && $_SESSION['hammer']) {
                 $_SESSION['hammer'] = false;
                 $messageForThisTurn = "Vous avez cassé le mur !";
@@ -119,18 +110,13 @@ if (isset($_POST['direction'])) {
             $catMoved = true;
         }
     }
-    //stocker le message uniquement pour ce tour
-    $_SESSION['message'] = $messageForThisTurn;
+    $_SESSION['message'] = $messageForThisTurn; //msg temporaire pour un tour
 
-    //ensuite déplacer souris seulement si le chat a bougé et pas gagné
+    // Déplacement souris
     if ($catMoved && !$_SESSION['win']) {
-        //sauvegarde ancienne position chat
-        $old_cat_x = $_SESSION['pos']['x'];
-        $old_cat_y = $_SESSION['pos']['y'];
-        //MAJ position chat
         $_SESSION['pos']['x'] = $new_cat_x;
         $_SESSION['pos']['y'] = $new_cat_y;
-        //trouve la souris
+        
         $mouse = findMouse($_SESSION['lab']);
         if ($mouse) {
             $directions = [
@@ -139,19 +125,18 @@ if (isset($_POST['direction'])) {
                 ['x' => -1, 'y' => 0], // gauche
                 ['x' => 1, 'y' => 0]   // droite
             ];
-            //filtre les directions valides (hors murs et hors nouvelle position du chat)
+            //filtre les directions valides (hors murs et hors nouvelle pos du chat)
             $validDirections = [];
             foreach ($directions as $dir) {
                 $new_mouse_x = $mouse['x'] + $dir['x'];
                 $new_mouse_y = $mouse['y'] + $dir['y'];
                 
-                if (isset($_SESSION['lab'][$new_mouse_y][$new_mouse_x])) {
-                    $cell = $_SESSION['lab'][$new_mouse_y][$new_mouse_x];
-                    if ($cell === '.' && !($new_mouse_x == $new_cat_x && $new_mouse_y == $new_cat_y)) {
-                        $validDirections[] = $dir;
-                    }
+                if (isset($_SESSION['lab'][$new_mouse_y][$new_mouse_x]) && 
+                    $_SESSION['lab'][$new_mouse_y][$new_mouse_x] === '.' && 
+                    !($new_mouse_x == $new_cat_x && $new_mouse_y == $new_cat_y)) {
+                    $validDirections[] = $dir;
                 }
-            } 
+            }
             //deplacement souris si possible
             if (!empty($validDirections)) {
                 $chosenDir = $validDirections[array_rand($validDirections)];
