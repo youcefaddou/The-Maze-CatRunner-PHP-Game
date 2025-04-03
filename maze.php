@@ -70,7 +70,8 @@ if (!isset($_SESSION['lab']) || isset($_POST['reset'])) {
     }
 }
 //trouver la souris
-function findMouse($lab) {
+function findMouse($lab)
+{
     foreach ($lab as $y => $ligne) {
         $x = strpos($ligne, 'S');
         if ($x !== false) {
@@ -82,25 +83,33 @@ function findMouse($lab) {
 
 if (isset($_POST['direction'])) {
     $_SESSION['message'] = '';
-    
+
     //deplacement du chat
     $new_cat_x = $_SESSION['pos']['x'];
     $new_cat_y = $_SESSION['pos']['y'];
 
     switch ($_POST['direction']) {
-        case 'up': $new_cat_y--; break;
-        case 'down': $new_cat_y++; break;
-        case 'left': $new_cat_x--; break;
-        case 'right': $new_cat_x++; break;
+        case 'up':
+            $new_cat_y--;
+            break;
+        case 'down':
+            $new_cat_y++;
+            break;
+        case 'left':
+            $new_cat_x--;
+            break;
+        case 'right':
+            $new_cat_x++;
+            break;
     }
 
     //verification déplacement chat
     $catMoved = false;
     $messageForThisTurn = '';
-    
+
     if (isset($_SESSION['lab'][$new_cat_y][$new_cat_x])) {
         $case = $_SESSION['lab'][$new_cat_y][$new_cat_x];
-        
+
         if ($case == 'S') {
             $_SESSION['win'] = true;
             $catMoved = true;
@@ -133,7 +142,7 @@ if (isset($_POST['direction'])) {
     if ($catMoved && !$_SESSION['win']) {
         $_SESSION['pos']['x'] = $new_cat_x;
         $_SESSION['pos']['y'] = $new_cat_y;
-        
+
         $mouse = findMouse($_SESSION['lab']);
         if ($mouse) {
             $directions = [
@@ -147,10 +156,12 @@ if (isset($_POST['direction'])) {
             foreach ($directions as $dir) {
                 $new_mouse_x = $mouse['x'] + $dir['x'];
                 $new_mouse_y = $mouse['y'] + $dir['y'];
-                
-                if (isset($_SESSION['lab'][$new_mouse_y][$new_mouse_x]) && 
-                    $_SESSION['lab'][$new_mouse_y][$new_mouse_x] === '.' && 
-                    !($new_mouse_x == $new_cat_x && $new_mouse_y == $new_cat_y)) {
+
+                if (
+                    isset($_SESSION['lab'][$new_mouse_y][$new_mouse_x]) &&
+                    $_SESSION['lab'][$new_mouse_y][$new_mouse_x] === '.' &&
+                    !($new_mouse_x == $new_cat_x && $new_mouse_y == $new_cat_y)
+                ) {
                     $validDirections[] = $dir;
                 }
             }
@@ -159,7 +170,7 @@ if (isset($_POST['direction'])) {
                 $chosenDir = $validDirections[array_rand($validDirections)];
                 $new_mouse_x = $mouse['x'] + $chosenDir['x'];
                 $new_mouse_y = $mouse['y'] + $chosenDir['y'];
-                
+
                 $_SESSION['lab'][$mouse['y']][$mouse['x']] = '.';
                 $_SESSION['lab'][$new_mouse_y][$new_mouse_x] = 'S';
             }
