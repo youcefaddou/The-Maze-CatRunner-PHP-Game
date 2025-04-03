@@ -17,6 +17,7 @@ labyrinthe sera choisi aléatoirement entre les labyrinthes pré faits que vous
 avez réalisés précédemment et une dizaine de labyrinthes automatisés.
 ➢ A chaque déplacement du chat, la souris doit se déplacer dans la case la plus lointaine du chat à sa disposition
 ➢ Ajout de cases "item", avec comme 1er item un marteau posé aléatoirement dans la grille. Lorsque le chat arrive sur la case marteau, il s'en saisit et peut briser le prochain mur qu'il rencontre.
+➢ Ajouter des points de vie au chat. Il commence à 9, à chaque fois qu'il se prend un mur il en perd 1.
 
 //     ENG      //
 
@@ -29,3 +30,4 @@ The player controls a cat that must navigate through a maze to find the mouse. T
 ➢ Optional (for further challenge): Implement automated maze generation—no more manual creation! Each new game will randomly select a maze from your pre-made ones and a pool of 10 procedurally generated mazes.
 ➢ Each time the cat moves, the mouse must move to the farthest possible tile away from the cat.
 ➢ Add "item" tiles, starting with a hammer placed randomly in the grid. When the cat steps on the hammer, it picks it up and can destroy the next wall it encounters.
+➢ Add life points to the cat. It starts with 9, every time it hits a wall, it loses 1.
