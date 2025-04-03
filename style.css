@@ -106,10 +106,35 @@ body {
     font-size: 1.5em;
     margin: 0 0 15px 0;
 }
+.game-over-message {
+    text-align: center;
+    padding: 20px;
+    background-color: #dff0d8;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.game-over-message p {
+    color: #3c763d;
+    font-size: 1.5em;
+    margin: 0 0 15px 0;
+}
 
 .error-message {
     color: #a94442;
     background-color: #f2dede;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 0 0 15px 0;
+    text-align: center;
+    width: 100%;
+}
+.life-message {
+    color: #3c763d;
+    font-weight: 700;
+    background-color: rgb(255, 242, 219);
+    font-size: 22px;
     padding: 10px;
     border-radius: 4px;
     margin: 0 0 15px 0;
@@ -123,6 +148,14 @@ button {
 }
 
 .win-message button {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+}
+.game-over-message button {
     padding: 10px 20px;
     background-color: #5cb85c;
     color: white;

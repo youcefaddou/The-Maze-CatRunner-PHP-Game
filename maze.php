@@ -56,8 +56,10 @@ if (!isset($_SESSION['lab']) || isset($_POST['reset'])) {
     $_SESSION['message'] = '';
     $_SESSION['lab'] = $labyrinthes[array_rand($labyrinthes)];  //choix d'un lab random
     $_SESSION['win'] = false;
+    $_SESSION['gameOver'] = false;
     $_SESSION['hammer'] = false;
-    
+    $_SESSION['life'] = 9;
+    $life = $_SESSION['life'];
     //trouver la position du chat
     foreach ($_SESSION['lab'] as $y => $ligne) {
         $x = strpos($ligne, 'C');
@@ -114,7 +116,12 @@ if (isset($_POST['direction'])) {
                 $_SESSION['lab'][$new_cat_y][$new_cat_x] = '.';
                 $catMoved = true;
             } else {
-                $messageForThisTurn = "Attention il y a un mur, déplacement impossible !";
+                $messageForThisTurn = "Vous avez heurté le mur, vous perdez une vie !";
+                $_SESSION['life']--;
+                if ($_SESSION['life'] === 0) {
+                    $messageForThisTurn = "Vous avez perdu !";
+                    $_SESSION['gameOver'] = true;
+                }
             }
         } else {
             $catMoved = true;

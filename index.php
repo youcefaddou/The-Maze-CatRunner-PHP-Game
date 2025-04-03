@@ -11,16 +11,23 @@
 
 <body>
     <header class="headerContainer">
-    <img src="./images/brouillard.png" alt="Brouillard">
-    <img src="./images/brouillard.png" alt="Brouillard">
-    <h1>The Maze Cat Runner</h1>
-    <img src="./images/brouillard.png" alt="Brouillard">
-    <img src="./images/brouillard.png" alt="Brouillard">
+        <img src="./images/brouillard.png" alt="Brouillard">
+        <img src="./images/brouillard.png" alt="Brouillard">
+        <h1>The Maze Cat Runner</h1>
+        <img src="./images/brouillard.png" alt="Brouillard">
+        <img src="./images/brouillard.png" alt="Brouillard">
     </header>
     <div id="mazeContainer">
         <?php if (isset($_SESSION['win']) && $_SESSION['win']) : ?>
             <div class="win-message">
                 <p>Gagné ! Le chat a attrapé la souris !</p>
+                <form method="post">
+                    <button type="submit" name="reset">Rejouer</button>
+                </form>
+            </div>
+        <?php elseif (isset($_SESSION['gameOver']) && $_SESSION['gameOver']) : ?>
+            <div class="game-over-message">
+                <p>Game Over ! Le chat n'a plus de vies !</p>
                 <form method="post">
                     <button type="submit" name="reset">Rejouer</button>
                 </form>
@@ -54,7 +61,7 @@
                                             echo '<img src="./images/marteau.png" alt="marteau">';
                                         } elseif ($case == 'S') {
                                             echo '<img src="./images/souris.png" alt="souris">';
-                                        }  else {
+                                        } else {
                                             echo '&nbsp;';
                                         }
                                     }
@@ -82,6 +89,9 @@
             </div>
             <?php if (!empty($_SESSION['message'])): ?>
                 <p class="error-message"><?php echo $_SESSION['message']; ?></p>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['life'])): ?>
+                <p class="life-message">Vies restantes: <?php echo $_SESSION['life']; ?></p>
             <?php endif; ?>
         <?php endif; ?>
     </div>
